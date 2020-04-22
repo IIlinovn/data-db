@@ -19,3 +19,4 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 });
 
 Route::post('/task', 'TaskController@store');
+Route::get('/task', 'TaskController@index');
