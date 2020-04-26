@@ -17,6 +17,11 @@ class TaskController extends Controller
         return Task::all();
     }
 
+    public function preview()
+    {
+        return view('demo', ['data' => Task::all()->sortBy('task_id')->reverse()->take(500)->values()]);
+    }
+
     /**
      * Show the form for creating a new resource.
      *

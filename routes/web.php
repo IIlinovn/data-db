@@ -13,12 +13,10 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/', 'TaskController@preview');
 
 Route::get('/csv', function() {
-    $table = \App\Task::offset(0)->limit(500)->get();
+    $table = \App\Task::all()->sortBy('task_id')->reverse()->take(500)->values();
     $output='';
     foreach ($table as $row) {
         $row['desc'] =  str_replace("\n", ' ', strip_tags($row['desc']));
