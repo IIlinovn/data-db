@@ -17,7 +17,7 @@ class Task extends Model
         "price_type",
         "price_valuta",
         "maxprice",
-        //"date_in",
+        "date_in",
         "desc",
         "response",
         "view",
@@ -34,6 +34,10 @@ class Task extends Model
         "user_fio",
         "forAll",
         "isHidden",
-        "isVacancy"
+        "isVacancy",
+        "isBusiness",
+        "total",
+        "timeOut",
+        "isSpecial",
     ];
 }
