@@ -18,7 +18,7 @@ Route::get('/', function () {
 });
 
 Route::get('/csv', function() {
-    $table = \App\Task::all();
+    $table = \App\Task::offset(0)->limit(500)->get();
     $output='';
     foreach ($table as $row) {
         $row['desc'] =  str_replace("\n", ' ', strip_tags($row['desc']));
@@ -28,6 +28,8 @@ Route::get('/csv', function() {
         'Content-Type' => 'text/csv',
         'Content-Disposition' => 'attachment; filename="ExportTasks.csv"',
     );
+
+    //return $output;
 
     return Response::make(rtrim($output, "\r\n"), 200, $headers);
 });
