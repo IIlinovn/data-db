@@ -16,3 +16,18 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 });
+
+Route::get('/csv', function() {
+    $table = \App\Task::all();
+    $output='';
+    foreach ($table as $row) {
+        $row['desc'] =  str_replace("\n", ' ', strip_tags($row['desc']));
+        $output.=  implode(";",$row->toArray()) . "\r\n";
+    }
+    $headers = array(
+        'Content-Type' => 'text/csv',
+        'Content-Disposition' => 'attachment; filename="ExportTasks.csv"',
+    );
+
+    return Response::make(rtrim($output, "\r\n"), 200, $headers);
+});
