@@ -31,3 +31,20 @@ Route::get('/csv', function() {
 
     return Response::make(rtrim($output, "\r\n"), 200, $headers);
 });
+
+Route::get('/csv/all', function() {
+    $table = \App\Task::all();
+    $output='';
+    foreach ($table as $row) {
+        $row['desc'] =  str_replace("\n", ' ', strip_tags($row['desc']));
+        $output.=  implode(";",$row->toArray()) . "\r\n";
+    }
+    $headers = array(
+        'Content-Type' => 'text/csv',
+        'Content-Disposition' => 'attachment; filename="ExportTasks.csv"',
+    );
+
+    //return $output;
+
+    return Response::make(rtrim($output, "\r\n"), 200, $headers);
+});
