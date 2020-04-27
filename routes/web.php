@@ -19,6 +19,7 @@ Route::get('/csv', function() {
     $table = \App\Task::all()->sortBy('task_id')->reverse()->take(500)->values();
     $output='';
     foreach ($table as $row) {
+        $row['anons'] =  str_replace("\n", ' ', strip_tags($row['anons']));
         $row['desc'] =  str_replace("\n", ' ', strip_tags($row['desc']));
         $output.=  implode(";",$row->toArray()) . "\r\n";
     }
@@ -36,6 +37,7 @@ Route::get('/csv/all', function() {
     $table = \App\Task::all();
     $output='';
     foreach ($table as $row) {
+        $row['anons'] =  str_replace("\n", ' ', strip_tags($row['anons']));
         $row['desc'] =  str_replace("\n", ' ', strip_tags($row['desc']));
         $output.=  implode(";",$row->toArray()) . "\r\n";
     }
