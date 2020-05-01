@@ -1,0 +1,54 @@
+apt-get install git
+
+apt-get install php7.2 libapache2-mod-php7.2 php7.2-mbstring php7.2-xmlrpc php7.2-soap php7.2-gd php7.2-xml php7.2-cli php7.2-zip
+
+apt-get install php-mysql php-mbstring php-tokenizer php-xml php-json php-common
+
+apt-get install curl nano
+
+curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
+
+cd /var/www
+git clone https://github.com/IIlinovn/data-db.git
+
+chown -R www-data:www-data /var/www/data-db/
+chmod -R 755 /var/www/data-db/
+
+nano /etc/apache2/sites-available/ovz1.iilinov-n.pr46m.vps.myjino.ru.conf
+
+<VirtualHost *:80>   
+  ServerAdmin admin@example.com
+     DocumentRoot /var/www/data-db/public
+     ServerName ovz1.iilinov-n.pr46m.vps.myjino.ru
+
+     <Directory /var/www/data-db/public>
+        Options +FollowSymlinks
+        AllowOverride All
+        Require all granted
+     </Directory>
+
+     ErrorLog debug
+     ErrorLog ${APACHE_LOG_DIR}/error.log
+     CustomLog ${APACHE_LOG_DIR}/access.log combined
+</VirtualHost>
+
+a2ensite ovz1.iilinov-n.pr46m.vps.myjino.ru.conf
+a2enmod rewrite
+
+a2dissite 000-default.conf
+
+service apache2 reload
+
+cd /var/www/data-db
+composer install
+
+CREATE DATABASE laravel;
+CREATE USER `laravel_user`@`localhost` IDENTIFIED BY '********************************************';
+GRANT ALL ON laravel.* TO `laravel_user`@`localhost`;
+FLUSH PRIVILEGES;
+
+mv .env.example .env
+
+// Настройка env
+
+mysql laravel < data.db.sql
