@@ -14,12 +14,12 @@ git clone https://github.com/IIlinovn/data-db.git
 chown -R www-data:www-data /var/www/data-db/
 chmod -R 755 /var/www/data-db/
 
-nano /etc/apache2/sites-available/ovz1.iilinov-n.pr46m.vps.myjino.ru.conf
+nano /etc/apache2/sites-available/www.таски-инфо.рф.conf
 
-<VirtualHost *:80>   
+<VirtualHost *:80>
   ServerAdmin admin@example.com
      DocumentRoot /var/www/data-db/public
-     ServerName ovz1.iilinov-n.pr46m.vps.myjino.ru
+     ServerName www.таски-инфо.рф
 
      <Directory /var/www/data-db/public>
         Options +FollowSymlinks
@@ -32,7 +32,7 @@ nano /etc/apache2/sites-available/ovz1.iilinov-n.pr46m.vps.myjino.ru.conf
      CustomLog ${APACHE_LOG_DIR}/access.log combined
 </VirtualHost>
 
-a2ensite ovz1.iilinov-n.pr46m.vps.myjino.ru.conf
+a2ensite www.таски-инфо.рф.conf
 a2enmod rewrite
 
 a2dissite 000-default.conf
@@ -52,3 +52,15 @@ mv .env.example .env
 // Настройка env
 
 mysql laravel < data.db.sql
+
+apt-get update
+apt-get install software-properties-common
+add-apt-repository universe
+add-apt-repository ppa:certbot/certbot
+apt-get update
+
+apt-get install certbot python3-certbot-apache
+
+certbot --apache
+certbot renew --dry-run
+
