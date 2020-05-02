@@ -6,6 +6,15 @@
     <a href="/csv">Выполнить экспорт 500 записей</a>
 </p>
 
+<p>
+<ul>
+    @foreach ($sites as $site => $item)
+        <li> <span style="display: inline-block; min-width: 150px;" >{{$site}}</span> : {{ $item  }} </li>
+    @endforeach
+
+</ul>
+</p>
+
 <h2>Накопленная информация (50 штук)</h2>
 
 @foreach ($data as $item)

@@ -21,7 +21,8 @@ class TaskController extends Controller
     {
         return view('demo',
             [
-                'count' => count(Task::all()),
+                'count' => Task::all()->count(),
+                'sites' => Task::all()->groupBy('site')->map( function ($item) { return count($item); })->sort( function ($i1, $i2) { return $i1 < $i2 ? 1: -1; } ),
                 'data' => Task::all()->sortBy('task_id')->reverse()->take(50)->values()
             ]
         );
@@ -39,13 +40,13 @@ class TaskController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
     {
 
-        foreach($request->all() as $value) {
+        foreach ($request->all() as $value) {
             $task = Task::firstOrNew(['id' => $value['id']]);
             $task->fill($value);
             $task->save();
@@ -56,7 +57,7 @@ class TaskController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Task  $task
+     * @param \App\Task $task
      * @return \Illuminate\Http\Response
      */
     public function show(Task $task)
@@ -67,7 +68,7 @@ class TaskController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Task  $task
+     * @param \App\Task $task
      * @return \Illuminate\Http\Response
      */
     public function edit(Task $task)
@@ -78,8 +79,8 @@ class TaskController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Task  $task
+     * @param \Illuminate\Http\Request $request
+     * @param \App\Task $task
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, Task $task)
@@ -90,7 +91,7 @@ class TaskController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Task  $task
+     * @param \App\Task $task
      * @return \Illuminate\Http\Response
      */
     public function destroy(Task $task)
