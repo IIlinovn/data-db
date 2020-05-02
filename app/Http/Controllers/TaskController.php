@@ -19,7 +19,12 @@ class TaskController extends Controller
 
     public function preview()
     {
-        return view('demo', ['data' => Task::all()->sortBy('task_id')->reverse()->take(500)->values()]);
+        return view('demo',
+            [
+                'count' => count(Task::all()),
+                'data' => Task::all()->sortBy('task_id')->reverse()->take(500)->values()
+            ]
+        );
     }
 
     /**
