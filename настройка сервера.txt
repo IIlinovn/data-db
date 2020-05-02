@@ -67,3 +67,11 @@ certbot renew --dry-run
 cd /var/www/data-db
 chmod +x deploy.sh
 chgrp -R www-data .
+
+
+adduser user123
+mkdir vendor
+chown www-data:www-data vendor/
+composer install
+
+sdfsdjfhsajdhkfhsadfkskhdfhsjdhfkjashdfkjashdfkjsakd
