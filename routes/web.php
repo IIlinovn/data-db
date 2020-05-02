@@ -51,5 +51,5 @@ Route::get('/csv/all', function() {
     return Response::make(rtrim($output, "\r\n"), 200, $headers);
 });
 
-Route::post('deploy', 'DeployController@deploy');
-Route::post('test', 'DeployController@deploy1');
+Route::post('/deploy', 'DeployController@deploy');
+Route::post('/test', 'DeployController@deploy1');
