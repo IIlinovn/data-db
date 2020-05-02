@@ -22,7 +22,7 @@ class TaskController extends Controller
         return view('demo',
             [
                 'count' => count(Task::all()),
-                'data' => Task::all()->sortBy('task_id')->reverse()->take(500)->values()
+                'data' => Task::all()->sortBy('task_id')->take(50)->reverse()->values()
             ]
         );
     }
