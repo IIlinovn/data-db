@@ -64,3 +64,6 @@ apt-get install certbot python3-certbot-apache
 certbot --apache
 certbot renew --dry-run
 
+cd /var/www/data-db
+chmod +x deploy.sh
+chgrp -R www-data .

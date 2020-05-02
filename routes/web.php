@@ -50,3 +50,5 @@ Route::get('/csv/all', function() {
 
     return Response::make(rtrim($output, "\r\n"), 200, $headers);
 });
+
+Route::post('deploy', 'DeployController@deploy');
