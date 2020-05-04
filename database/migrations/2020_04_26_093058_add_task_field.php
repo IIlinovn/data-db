@@ -36,6 +36,14 @@ class AddTaskField extends Migration
      */
     public function down()
     {
-        //
+        Schema::table('tasks', function (Blueprint $table) {
+            $table->dateTime('date_in')->nullable()->change();
+
+            $table->dropColumn('isBusiness');
+            $table->dropColumn('total');
+            $table->dropColumn('timeOut');
+            $table->dropColumn('isSpecial');
+        });
+
     }
 }
