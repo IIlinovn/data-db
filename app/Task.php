@@ -39,5 +39,8 @@ class Task extends Model
         "total",
         "timeOut",
         "isSpecial",
+        "isPremium",
+        "forPlus",
+        "budgetUpper",
     ];
 }
