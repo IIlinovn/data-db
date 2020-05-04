@@ -47,7 +47,7 @@ class TaskController extends Controller
     {
 
         foreach ($request->all() as $value) {
-            $task = Task::firstOrNew(['id' => $value['id']]);
+            $task = Task::firstOrNew(['id' => $value['id'], 'site' => $value['site']]);
             $task->fill($value);
             $task->save();
         }
