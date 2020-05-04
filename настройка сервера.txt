@@ -44,7 +44,9 @@ composer install
 
 CREATE DATABASE laravel;
 CREATE USER `laravel_user`@`localhost` IDENTIFIED BY '********************************************';
-GRANT ALL ON laravel.* TO `laravel_user`@`localhost`;
+CREATE USER `laravel_user`@`212.164.204.95` IDENTIFIED BY '********************************************';
+GRANT ALL ON `laravel`.* TO `laravel_user`@`localhost`;
+GRANT ALL ON `laravel`.* TO `laravel_user`@`212.164.204.95`;
 FLUSH PRIVILEGES;
 
 mv .env.example .env
